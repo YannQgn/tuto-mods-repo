@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Installer des mods sur R.E.P.O. (Steam)</title>
+  <style>
+    :root {
+      --ink: #1c1b19;
+      --muted: #5c5852;
+      --line: #e4dfd6;
+      --paper: #fffdf9;
+      --desk: #e7e2d8;
+      --accent: #0f6e62;
+      --accent-soft: #e7f3f0;
+      --warn: #8a5a12;
+      --warn-soft: #fbf3e4;
+      --shadow: 0 18px 50px rgba(40, 32, 20, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--desk);
+      color: var(--ink);
+      font: 17px/1.55 "Segoe UI", "Helvetica Neue", sans-serif;
+    }
+
+    .sheet {
+      max-width: 820px;
+      margin: 36px auto 64px;
+      background: var(--paper);
+      padding: 56px 64px 72px;
+      box-shadow: var(--shadow);
+    }
+
+    header.top { margin-bottom: 28px; }
+
+    .kicker {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 40px;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .lede {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    nav.toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin: 28px 0 8px;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    nav.toc a { color: var(--accent); text-decoration: none; }
+    nav.toc a:hover { text-decoration: underline; }
+
+    h2 {
+      margin: 42px 0 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      margin: 28px 0 8px;
+      font-size: 18px;
+    }
+
+    p { margin: 0 0 12px; }
+
+    a { color: var(--accent); }
+
+    .note, .tip {
+      margin: 18px 0;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 15.5px;
+    }
+
+    .note {
+      background: var(--warn-soft);
+      color: #4d3b1d;
+    }
+
+    .tip { background: var(--accent-soft); }
+
+    .note strong, .tip strong { color: inherit; }
+
+    .pick {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 16px 0 8px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 16px 14px;
+    }
+
+    .card h3 { margin: 0 0 6px; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    .card .tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    ol.steps {
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+
+    ol.steps > li {
+      position: relative;
+      margin: 0 0 18px;
+      padding: 2px 0 0 46px;
+      counter-increment: step;
+    }
+
+    ol.steps > li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 30px;
+      text-align: center;
+    }
+
+    ol.steps strong { font-weight: 650; }
+
+    figure {
+      margin: 14px 0 6px;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #111;
+    }
+
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.4;
+    }
+
+    .code {
+      margin: 8px 0 16px;
+      padding: 12px 14px;
+      background: #f4f1ea;
+      border-radius: 8px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 15px;
+      word-break: break-all;
+    }
+
+    ul.clean {
+      margin: 8px 0 12px;
+      padding-left: 1.15em;
+    }
+
+    ul.clean li { margin: 4px 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 4px;
+      font-size: 15px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th { font-size: 13px; color: var(--muted); font-weight: 650; }
+
+    footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    @media (max-width: 720px) {
+      .sheet { margin: 0; padding: 28px 20px 48px; }
+      h1 { font-size: 32px; }
+      .pick { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      body { background: white; }
+      .sheet { margin: 0; box-shadow: none; max-width: none; padding: 0; }
+      a { color: inherit; text-decoration: none; }
+      figure { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <article class="sheet">
+    <header class="top">
+      <p class="kicker">Guide R.E.P.O. Steam</p>
+      <h1>Installer des mods</h1>
+      <p class="lede">Tu as un code. r2modman ou Thunderstore Mod Manager installent les mods. Les captures sont faites dans r2modman. Sur Thunderstore, les boutons sont les mêmes.</p>
+    </header>
+
+    <nav class="toc">
+      <a href="#installer">r2modman</a>
+      <a href="#jeu">Choisir le jeu</a>
+      <a href="#code">Importer le pack</a>
+      <a href="#lancer">Lancer</a>
+      <a href="#thunderstore">Thunderstore</a>
+      <a href="#aide">Un problème</a>
+    </nav>
+
+    <h2 id="installer">Installer r2modman</h2>
+    <ol class="steps">
+      <li>
+        <a href="https://thunderstore.io/package/download/ebkr/r2modman/3.2.19/">Télécharger r2modman 3.2.19 (zip)</a>.
+        Ouvre le zip, lance <em>r2modman Setup 3.2.19.exe</em>, et suis l'installateur.
+        <figure>
+          <img src="images/r2modman-page.png" alt="Page Thunderstore de r2modman, bouton Download à droite">
+          <figcaption>
+            Le zip, c'est le bouton Download.
+            Pas Install with App : ça installe un autre programme.
+            Si le lien du zip ne marche plus :
+            <a href="https://thunderstore.io/c/repo/p/ebkr/r2modman/">la page Thunderstore</a>
+            ou
+            <a href="https://github.com/ebkr/r2modmanPlus/releases/latest">GitHub</a>.
+          </figcaption>
+        </figure>
+      </li>
+    </ol>
+
+    <h2 id="jeu">Choisir R.E.P.O.</h2>
+    <p>Ouvre r2modman. Dans Game selection, cherche R.E.P.O. et clique dessus.</p>
+    <figure>
+      <img src="images/r2-game-select.png" alt="Écran de sélection de jeu dans r2modman">
+      <figcaption>La capture montre d'autres jeux. Utilise la recherche pour trouver R.E.P.O.</figcaption>
+    </figure>
+
+    <h2 id="code">Importer le pack</h2>
+    <p>Le code :</p>
+    <p class="code">01a0c56c-7eef-af1f-c8cb-6c550fa70917</p>
+    <ol class="steps">
+      <li>
+        Clique Import / Update.
+        <figure>
+          <img src="images/01-import.png" alt="Profile selection, bouton Import / Update entouré">
+          <figcaption>Sur la liste des profils.</figcaption>
+        </figure>
+      </li>
+      <li>
+        Import new profile.
+        <figure>
+          <img src="images/02-nouveau.png" alt="Choix Import new profile">
+          <figcaption>Un nouveau profil, pas une mise à jour.</figcaption>
+        </figure>
+      </li>
+      <li>
+        From code.
+        <figure>
+          <img src="images/03-from-code.png" alt="Choix From code">
+        </figure>
+      </li>
+      <li>
+        Colle le code, puis Continue.
+        <figure>
+          <img src="images/04-code.png" alt="Champ du code de profil et bouton Continue">
+        </figure>
+      </li>
+      <li>
+        Tu vois les mods du pack. Clique Import.
+        <figure>
+          <img src="images/05-mods.png" alt="Liste des mods à installer, bouton Import">
+          <figcaption>BepInExPack est dans la liste, avec le reste.</figcaption>
+        </figure>
+      </li>
+      <li>
+        Choisis un nom, puis Create.
+        <figure>
+          <img src="images/06-nom.png" alt="Nom du profil et bouton Create">
+          <figcaption>Le nom sur la capture est un exemple. Tu mets celui que tu veux.</figcaption>
+        </figure>
+      </li>
+      <li>
+        Attends la fin du téléchargement. Ne ferme pas r2modman.
+        <figure>
+          <img src="images/07-dl.png" alt="Téléchargement des mods en cours">
+        </figure>
+      </li>
+      <li id="lancer">
+        Clique le profil, puis Select profile.
+        <figure>
+          <img src="images/08-select.png" alt="Profil importé et bouton Select profile">
+        </figure>
+      </li>
+      <li>
+        Start modded, en haut à gauche.
+        <figure>
+          <img src="images/09-lancer.png" alt="Bouton Start modded et liste des mods installés">
+        </figure>
+      </li>
+    </ol>
+    <p>Si tu lances R.E.P.O. depuis Steam, tu joues sans mods. Start vanilla fait pareil.</p>
+
+    <h2 id="thunderstore">Thunderstore Mod Manager</h2>
+    <p>Même code, même clics. Le programme passe par Overwolf.</p>
+    <p><a href="https://www.overwolf.com/app/Thunderstore-Thunderstore_Mod_Manager">Télécharger Thunderstore Mod Manager</a>. Le bouton Download on Overwolf installe aussi Overwolf.</p>
+    <figure>
+      <img src="images/overwolf-page.png" alt="Page Overwolf de Thunderstore Mod Manager">
+      <figcaption>Download on Overwolf.</figcaption>
+    </figure>
+    <p>Ouvre le programme, cherche R.E.P.O., puis suis les mêmes étapes que plus haut : Import / Update, Import new profile, From code, colle le code, Import, donne un nom, attends le téléchargement, Select profile.</p>
+    <p>Pour jouer, clique Modded, en haut à droite. Vanilla lance le jeu sans mods.</p>
+
+    <h2 id="aide">Un problème</h2>
+    <p>Écris à @Typholz ou @Paulo. On pourra partager l'écran.</p>
+  </article>
+</body>
+</html>
